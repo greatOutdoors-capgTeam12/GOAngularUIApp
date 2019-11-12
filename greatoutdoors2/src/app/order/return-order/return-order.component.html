@@ -1,0 +1,55 @@
+<form (ngSubmit)='returnOrder()' #returnorderform="ngForm" class="goforms" id="return-order-form">
+    <div class="pannel-heading heading-green">
+        <div class="pannel-title">
+            <h4>Return Order</h4>
+        </div>
+
+    </div>
+    <div class="pannel-body">
+
+
+        <div class="form-group" [class.has-error]="orderidControl.invalid && orderidControl.touched && orderidControl.pattern">
+            <label for="order-id">Order Id</label>
+            <input type="text" pattern="[a-zA-Z]+[0-9]+[a-zA-Z0-9]*" class="form-control" id="order-id" name="orderid" placeholder="Enter order Id" ngModel #orderidControl="ngModel" [(ngModel)]='returnorder.orderid' required>
+            <div *ngIf="!orderidControl.value && orderidControl.touched" class="alert alert-danger">
+                Order Id is required
+            </div>
+            <div *ngIf="orderidControl.invalid && orderidControl.touched && orderidControl.value" class="alert alert-danger">
+                Order Id is invalid
+            </div>
+        </div>
+        <div class="form-group" [class.has-error]="useridControl.invalid && useridControl.touched && useridControl.pattern">
+            <label for="user-id">User Id</label>
+            <input type="text" pattern="[a-zA-Z]+[0-9]+[a-zA-Z0-9]*" class="form-control" id="user-id" name="userid" placeholder="Enter user id" required [(ngModel)]="returnorder.userid" #useridControl="ngModel">
+            <div *ngIf="!useridControl.value && useridControl.touched" class="alert alert-danger">
+                User Id is required
+            </div>
+            <div *ngIf="useridControl.invalid && useridControl.touched && useridControl.value" class="alert alert-danger">
+                User Id is invalid
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="reasonControl.invalid && reasonControl.touched">
+            <label for="reason">Reason</label>
+            <input type="text" pattern="[A-Za-z]+" class="form-control" id="reason" name="reason" placeholder="Enter reason" required [(ngModel)]="returnorder.reason" #reasonControl="ngModel">
+            <div *ngIf="!reasonControl.value && reasonControl.touched" class="alert alert-danger">
+                Order Id is required
+            </div>
+            <div *ngIf="reasonControl.invalid && reasonControl.touched && reasonControl.value" class="alert alert-danger">
+                Reason can only have letters
+            </div>
+        </div>
+
+
+        <div class="form-check" [class.has-error]="returnordercheck.invalid && returnordercheck.touched">
+            <input type="checkbox" name="formcheck" class="form-check-input" id="return-order-check" required ngModel #returnordercheck="ngModel">
+            <label class="form-check-label" for="return-order-check">I confirm all the details entered are correct</label>
+            <span class="help-block" style="color:red" *ngIf="returnordercheck.errors?.required && returnordercheck.touched">Check the confirmation box</span>
+        </div>
+        <div class="pannel-footer bg-grey">
+            <button type="submit" class="btn btn-default" [disabled]="returnorderform.invalid">Submit</button>
+
+        </div>
+
+    </div>
+</form>

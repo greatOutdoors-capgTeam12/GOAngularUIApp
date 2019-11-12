@@ -1,0 +1,89 @@
+<form #addproductform="ngForm" ngNativeValidate class="goforms" id="add-product-form" (ngSubmit)='saveProduct()'>
+    <div class="pannel-heading heading-green">
+        <div class="pannel-title">
+            <h4>{{productHeading}}</h4>
+            <h6>{{updateMessage}}</h6>
+
+        </div>
+
+    </div>
+    <div class="pannel-body">
+
+        <div class="form-group" [class.has-error]="addprodid.invalid && addprodid.touched">
+            <label for="add-prod-id">Product Id</label>
+            <input type="text" class="form-control" id="add-prod-id" name="prodid" placeholder="Enter product Id" pattern="^[a-zA-Z][a-zA-Z0-9]*$" [(ngModel)]="product.prodid" [disabled]='isDisabled()' #addprodid="ngModel" required>
+            <div class="help-block" style="color:red" *ngIf="addprodid.errors?.required && addprodid.touched" class="alert alert-danger">Product Id is required</div>
+            <div class="help-block" style="color:red" *ngIf="addprodid.errors?.pattern && addprodid.touched" class="alert alert-danger">Product Id should be alphanumeric starting with a letter</div>
+        </div>
+        <div class="form-group" [class.has-error]="addprodname.invalid && addprodname.touched">
+            <label for="add-prod-name">Product Name</label>
+            <input type="text" class="form-control" id="add-prod-name" name="prodname" placeholder="Enter product name" required [(ngModel)]="product.prodName" #addprodname="ngModel">
+            <div class="alert alert-danger" style="color:red" *ngIf="addprodname.invalid && addprodname.touched">Product Name is required</div>
+        </div>
+
+        <div class="form-group" [class.has-error]="addprodbrand.invalid && addprodbrand.touched">
+            <label for="add-prod-brand">Product Brand</label>
+            <input type="text" class="form-control" id="add-prod-brand" name="brand" placeholder="Enter product Brand" required [(ngModel)]="product.prodBrand" #addprodbrand="ngModel">
+            <div class="alert alert-danger" style="color:red" *ngIf="addprodbrand.invalid && addprodbrand.touched">Product Brand is required</div>
+        </div>
+        <div class="form-group" [class.has-error]="addprodspec.invalid && addprodspec.touched">
+            <label for="add-prod-spec">Product Specification</label>
+            <input type="text" class="form-control" id="add-prod-spec" name="spec" placeholder="Enter product specification" required [(ngModel)]="product.prodSpec" #addprodspec="ngModel">
+            <div class="alert alert-danger" style="color:red" *ngIf="addprodspec.invalid && addprodspec.touched">Product Specification is required</div>
+
+        </div>
+        <div class="form-group" [class.has-error]="addproddim.invalid && addproddim.touched">
+            <label for="add-prod-dim">Product Dimension</label>
+            <input type="text" class="form-control" id="add-prod-dim" name="dim" placeholder="Enter product Dimensions" required [(ngModel)]='product.prodDim' #addproddim="ngModel">
+            <div class="alert alert-danger" style="color:red" *ngIf="addproddim.invalid && addproddim.touched">Product Dimension is required</div>
+        </div>
+
+        <div class="form-group" [class.has-error]="addprodqty.invalid && addprodqty.touched">
+            <label for="add-prod-qty">Product Quantity</label>
+            <input type="number" class="form-control" placeholder="Enter Quantity" min="0" max="1000" step="1" name="qty" id="add-prod-qty" required [(ngModel)]='product.prodQty' #addprodqty="ngModel">
+            <div class="alert alert-danger" style="color:red" *ngIf="addprodqty.errors?.required  && addprodqty.touched">Product Quantatity is required</div>
+
+
+        </div>
+
+        <div class="form-group" [class.has-error]="addprodprice.invalid && addprodprice.touched">
+            <label for="add-prod-price">Product Price</label>
+            <input type="number" class="form-control" placeholder="Enter Price" min="0.00" max="1000000.00" step="0.01" name="price" id="add-prod-price" required [(ngModel)]='product.prodPrice' #addprodprice="ngModel">
+            <div class="alert alert-danger" style="color:red" *ngIf="addprodprice.invalid && addprodprice.touched">Product Price is required</div>
+        </div>
+
+        <div class="form-group" [class.has-error]="prodcat.touched && prodcat.invalid">
+            <label for="add-prod-cat">Product Category</label>
+            <select name="prodcat" class="form-control" id="add-prod-cat" required name="category" #prodcat=ngModel [(ngModel)]='product.category'>
+        <option value="1">Camping</option>
+        <option value="2">Golf</option>
+        <option value="3">Mountaineering</option>
+        <option value="4">Outdoor</option>
+        <option value="5">Personal</option>
+      </select>
+            <div class="alert alert-danger" style="color:red" *ngIf="prodcat.invalid && prodcat.touched">Product Dimension is required</div>
+        </div>
+
+        <div class="form-group">
+            <label for="add-prod-col">Product Colour</label>
+            <input type="color" class="form-control" name="col" required id="add-prod-col" [(ngModel)]="product.prodColor">
+        </div>
+
+        <div class="form-group" [class.has-error]="prodimg.invalid && prodimg.touched">
+            <label for="add-prod-img">Product Image ( .jpg File only)</label>
+            <input type="file" name="pic" id="add-prod-img" accept=".jpg" (change)="showPreviewImage($event)" required ngModel #prodimg="ngModel">
+            <div class="alert alert-danger" style="color:red" *ngIf="addprodid.errors?.required && addprodid.touched">Only .jpg file is accepted as product image</div>
+            <br><img [src]="localUrl" *ngIf="localUrl" class="imgPlaceholder" height="200" width="200">
+        </div>
+
+        <div class="form-check" [class.has-error]="addprodcheck.invalid && addprodcheck.touched">
+            <input type="checkbox" class="form-check-input" id="add-prod-check" name="add-prod-ck" required [(ngModel)]="product.isActive" #addprodcheck="ngModel">
+            <label class="form-check-label" for="add-prod-check">I confirm all the details entered are correct</label><br>
+            <div class="alert alert-danger" style="color:red" *ngIf="addprodcheck.errors?.required && addprodcheck.touched">Check the confirmation box</div>
+        </div>
+        <div class="pannel-footer bg-grey">
+            <button type="submit" class="btn btn-default " [disabled]="addproductform.invalid">{{submitText}}</button>
+
+        </div>
+    </div>
+</form>

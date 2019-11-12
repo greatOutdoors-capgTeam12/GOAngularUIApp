@@ -1,0 +1,75 @@
+<form (ngSubmit)='returnprod()' #returnproductform="ngForm" ngNativeValidate class="goforms" id="return-product-form">
+    <div class="pannel-heading heading-green">
+        <div class="pannel-title">
+            <h4>Return Product</h4>
+        </div>
+
+    </div>
+    <div class="pannel-body">
+
+        <div class="form-group" [class.has-error]="returnproductorderidControl.invalid && returnproductorderidControl.touched">
+            <label for="return-product-order-id">Order Id</label>
+            <input type="text" pattern="[a-zA-Z]+[0-9]+[a-zA-Z0-9]*" class="form-control" id="return-product-order-id" name="returnproductorderid" placeholder="Enter order Id" ngModel #returnproductorderidControl="ngModel" [(ngModel)]='returnproduct.orderid' required>
+            <div *ngIf="!returnproductorderidControl.value && returnproductorderidControl.touched" class="alert alert-danger">
+                Order Id is required
+            </div>
+            <div *ngIf="returnproductorderidControl.invalid && returnproductorderidControl.touched && returnproductorderidControl.value" class="alert alert-danger">
+                Order Id is invalid
+            </div>
+        </div>
+        <div class="form-group" [class.has-error]="returnproductuseridControl.invalid && returnproductuseridControl.touched">
+            <label for="return-product-user-id">User Id</label>
+            <input type="text" pattern="[a-zA-Z]+[0-9]+[a-zA-Z0-9]*" class="form-control" id="return-product-user-id" name="returnproductuserid" placeholder="Enter user id" required ngModel #returnproductuseridControl="ngModel" [(ngModel)]='returnproduct.userid'>
+            <div *ngIf="!returnproductuseridControl.value && returnproductuseridControl.touched" class="alert alert-danger">
+                User Id is required
+            </div>
+            <div *ngIf="returnproductuseridControl.invalid && returnproductuseridControl.touched && returnproductuseridControl.value" class="alert alert-danger">
+                User Id is invalid
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="returnproductproductidControl.invalid && returnproductproductidControl.touched">
+            <label for="return-product-product-id">Product Id</label>
+            <input type="text" pattern="[a-zA-Z]+[0-9]+[a-zA-Z0-9]*" class="form-control" id="return-product-product-id" name="returnproductproductid" placeholder="Enter product id" required ngModel #returnproductproductidControl="ngModel" [(ngModel)]='returnproduct.prodid'>
+            <div *ngIf="!returnproductproductidControl.value && returnproductproductidControl.touched" class="alert alert-danger">
+                Product Id is required
+            </div>
+            <div *ngIf="returnproductproductidControl.invalid && returnproductproductidControl.touched && returnproductproductidControl.value" class="alert alert-danger">
+                Product Id is invalid
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="returnproductqtyControl.invalid && returnproductqtyControl.touched">
+            <label for="return-product-qty">Quantity</label>
+            <input type="number" class="form-control" id="return-product-qty" min="1" name="returnproductqty" placeholder="Enter quantity" required ngModel #returnproductqtyControl="ngModel" [(ngModel)]='returnproduct.prodqty'>
+            <div *ngIf="!returnproductqtyControl.value && returnproductqtyControl.touched" class="alert alert-danger">
+                Product qty is required
+            </div>
+            <div *ngIf="returnproductqtyControl.invalid && returnproductqtyControl.touched && returnproductqtyControl.value" class="alert alert-danger">
+                Product qty is invalid
+            </div>
+        </div>
+
+        <div class="form-group" [class.has-error]="returnproductreasonControl.invalid && returnproductreasonControl.touched">
+            <label for="returnproductreason">Reason</label>
+            <input type="text" pattern="[A-Za-z]+" class="form-control" id="return-product-reason" name="returnproductreason" placeholder="Enter reason" required ngModel #returnproductreasonControl="ngModel" [(ngModel)]='returnproduct.reason'>
+            <div *ngIf="!returnproductreasonControl.value && returnproductreasonControl.touched" class="alert alert-danger">
+                Order Id is required
+            </div>
+            <div *ngIf="returnproductreasonControl.invalid && returnproductreasonControl.touched && returnproductreasonControl.value" class="alert alert-danger">
+                Reason can only have letters
+            </div>
+        </div>
+
+
+        <div class="form-check" [class.has-error]="returnordercheck.invalid && returnordercheck.touched">
+            <input type="checkbox" name="returnordercheck" class="form-check-input" id="return-order-check" required ngModel #returnordercheck="ngModel">
+            <label class="form-check-label" for="return-order-check">I confirm all the details entered are correct</label>
+            <span class="help-block" style="color:red" *ngIf="returnordercheck.errors?.required && returnordercheck.touched">Check the confirmation box</span>
+        </div>
+        <div class="pannel-footer bg-grey">
+            <button type="submit" class="btn btn-default " [disabled]="returnproductform.invalid">Submit</button>
+
+        </div>
+    </div>
+</form>
