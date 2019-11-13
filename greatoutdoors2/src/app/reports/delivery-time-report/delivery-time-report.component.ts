@@ -53,7 +53,7 @@ export class DeliveryTimeReportComponent implements OnInit {
     this.showEndDate = false;
     this.retailerIdList = [];
     
-    let url = "http://localhost:9090/capgemini.go/RetailerInventory/RetailerList";
+    let url = "http://localhost:9090/RetailerInventory/RetailerList";
     let jsonObject:any = {
       "URL": url
     };
@@ -65,7 +65,7 @@ export class DeliveryTimeReportComponent implements OnInit {
   async onSubmit() {
     // clear table
     this.clearTable();
-    let url = "http://localhost:9090/capgemini.go/RetailerInventory/DeliveryTimeReport";
+    let url = "http://localhost:9090/RetailerInventory/DeliveryTimeReport";
     let jsonObject:any = {
       "URL": url,
       "jsonFormData": {
