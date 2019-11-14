@@ -30,10 +30,10 @@
 
         <div class="form-group" [class.has-error] = "userRegisPhone.invalid && userRegisPhone.touched">
             <label for="user-reg-phone">Phone</label>
-            <input type="text" class="form-control" id="user-reg-phone" pattern="^\d{10}$" name="phone" placeholder="Enter phone number"
+            <input type="number" class="form-control" id="user-reg-phone" pattern="^\d{10}$" name="phone" placeholder="Enter phone number"
               required ngModel #userRegisPhone = "ngModel" [(ngModel)]='newUser.userNumber'>
               <span class="help-block" style="color:red" *ngIf="userRegisPhone.errors?.required && userRegisPhone.touched">Phone number is required</span>
-              <span class="help-block" style="color:red" *ngIf="userRegisPhone.errors?.pattern && userRegisPhone.touched">Phone number is invalid</span>
+              <span class="help-block" style="color:red" *ngIf="userRegisPhone.errors?.pattern && userRegisPhone.touched">Please Enter valid 10 digit Phone Number</span>
             </div>
 
 
